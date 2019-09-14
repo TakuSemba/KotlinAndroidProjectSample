@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply from: '../versions.gradle'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.sampleapp"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        test {
+            java.srcDir sharedTestDir
+        }
+        androidTest {
+            java.srcDir sharedTestDir
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation deps.constraint_layout
+    implementation deps.kotlin.stdlib
+    implementation deps.support.app_compat
+
+    implementation deps.lifecycle.runtime
+    kapt deps.lifecycle.compiler
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.livedata_ktx
+
+    implementation deps.navigation.runtime
+    implementation deps.navigation.runtime_ktx
+    implementation deps.navigation.fragment
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui
+    implementation deps.navigation.ui_ktx
+
+    testImplementation deps.junit
+    testImplementation deps.robolectric
+    testImplementation deps.truth
+    testImplementation deps.espresso
+    testImplementation deps.mockk.mockk
+    testImplementation deps.arch_core.runtime
+    testImplementation deps.arch_core.testing
+    testImplementation deps.coroutine.android
+    testImplementation deps.coroutine.test
+
+    testImplementation deps.test.core_ktx
+    testImplementation deps.test.junit_ktx
+    testImplementation deps.test.rules
+    // https://issuetracker.google.com/127986458
+    implementation deps.fragment.testing
+    implementation deps.fragment.fragment
+    implementation deps.test.core
+
+    androidTestImplementation deps.junit
+    androidTestImplementation deps.espresso
+    androidTestImplementation deps.mockk.android
+    androidTestImplementation deps.test.core_ktx
+    androidTestImplementation deps.test.junit_ktx
+    androidTestImplementation deps.test.rules
+}

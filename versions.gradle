@@ -1,0 +1,83 @@
+ext.deps = [:]
+
+def versions = [:]
+versions.android_gradle_plugin = "3.5.0"
+versions.kotlin = "1.3.50"
+versions.fragment = "1.1.0-alpha07"
+versions.constraint_layout = "1.1.3"
+versions.appcompat = "1.1.0"
+versions.core_ktx = "1.0.0"
+versions.arch_core = "2.0.1"
+versions.lifecycle = "2.2.0-alpha04"
+versions.navigation = "2.2.0-alpha01"
+versions.coroutine = "1.2.1"
+versions.junit = "4.12"
+versions.junit_ktx = "1.1.1-beta01"
+versions.mockk = "1.9.2"
+versions.robolectric = "4.2"
+versions.truth = "0.44"
+versions.test_core = '1.2.0-beta01'
+versions.test_rules = '1.2.0-beta01'
+versions.espresso = "3.1.0"
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.junit = "junit:junit:$versions.junit"
+deps.robolectric = "org.robolectric:robolectric:$versions.robolectric"
+deps.truth = "com.google.truth:truth:$versions.truth"
+deps.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+ext.deps = deps
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+def fragment = [:]
+fragment.fragment = "androidx.fragment:fragment:$versions.fragment"
+fragment.testing = "androidx.fragment:fragment-testing:$versions.fragment"
+deps.fragment = fragment
+
+def support = [:]
+support.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+deps.support = support
+
+def lifecycle = [:]
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def arch_core = [:]
+arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
+arch_core.testing = "androidx.arch.core:core-testing:$versions.arch_core"
+deps.arch_core = arch_core
+
+def navigation = [:]
+navigation.runtime = "androidx.navigation:navigation-runtime:$versions.navigation"
+navigation.runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.fragment = "androidx.navigation:navigation-fragment:$versions.navigation"
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.navigation = navigation
+
+def coroutine = [:]
+coroutine.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutine"
+coroutine.test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutine"
+deps.coroutine = coroutine
+
+def mockk = [:]
+mockk.mockk = "io.mockk:mockk:$versions.mockk"
+mockk.android = "io.mockk:mockk-android:$versions.mockk"
+deps.mockk = mockk
+
+def test = [:]
+test.junit_ktx = "androidx.test.ext:junit-ktx:$versions.junit_ktx"
+test.core = "androidx.test:core:$versions.test_core"
+test.core_ktx = "androidx.test:core-ktx:$versions.test_core"
+test.rules = "androidx.test:core-ktx:$versions.test_rules"
+deps.test = test
