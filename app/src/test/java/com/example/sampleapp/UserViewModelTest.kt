@@ -36,20 +36,20 @@ class UserViewModelTest {
     fun register_whenSuccess() {
         val repository = mockk<UserRepository>()
         val userObserver = mockk<Observer<User>>(relaxed = true)
-        val userStateObserver = mockk<Observer<UserState>>(relaxed = true)
+        val stateObserver = mockk<Observer<UserState>>(relaxed = true)
         val viewModel = UserViewModel(repository)
 
         viewModel.user.observeForever(userObserver)
-        viewModel.state.observeForever(userStateObserver)
+        viewModel.state.observeForever(stateObserver)
 
         coEvery { repository.register() } returns User(name = "test-user")
 
         viewModel.register()
 
         verifyOrder {
-            userStateObserver.onChanged(match { result -> result == UserState.REGISTERING })
+            stateObserver.onChanged(match { result -> result == UserState.REGISTERING })
             userObserver.onChanged(match { result -> result.name == "test-user" })
-            userStateObserver.onChanged(match { result -> result == UserState.REGISTERED })
+            stateObserver.onChanged(match { result -> result == UserState.REGISTERED })
         }
 
         assertThat(viewModel.user.value).isEqualTo(User("test-user"))
@@ -60,19 +60,19 @@ class UserViewModelTest {
     fun register_whenFailure() {
         val repository = mockk<UserRepository>()
         val userObserver = mockk<Observer<User>>(relaxed = true)
-        val userStateObserver = mockk<Observer<UserState>>(relaxed = true)
+        val stateObserver = mockk<Observer<UserState>>(relaxed = true)
         val viewModel = UserViewModel(repository)
 
         viewModel.user.observeForever(userObserver)
-        viewModel.state.observeForever(userStateObserver)
+        viewModel.state.observeForever(stateObserver)
 
         coEvery { repository.register() } throws RuntimeException("failed to register")
 
         viewModel.register()
 
         verifyOrder {
-            userStateObserver.onChanged(match { result -> result == UserState.REGISTERING })
-            userStateObserver.onChanged(match { result -> result == UserState.UNREGISTERED })
+            stateObserver.onChanged(match { result -> result == UserState.REGISTERING })
+            stateObserver.onChanged(match { result -> result == UserState.UNREGISTERED })
         }
 
         assertThat(viewModel.user.value).isNull()
